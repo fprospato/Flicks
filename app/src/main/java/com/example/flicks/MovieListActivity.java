@@ -10,6 +10,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -25,7 +27,8 @@ public class MovieListActivity extends AppCompatActivity {
 
     //instance fields
     AsyncHttpClient client;
-
+    String imageBaseURL; //base url for loading images
+    String posterSize; //poster size to user when fetching images
 
 
     @Override
@@ -34,7 +37,10 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_list);
 
         //initialize client
-        AsyncHttpClient client;
+        client = new AsyncHttpClient();
+
+        //get congfiguration method
+        getConfiguration();
     }
 
 
@@ -53,6 +59,25 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+
+                //try to get the poster
+                try {
+                    //get images data
+                    JSONObject images = response.getJSONObject("images");
+
+                    //get the image base url
+                    imageBaseURL = images.getString("secure_base_url"); //get string based on the identifier
+
+                    //get the poster size
+                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes"); //parse the value as an array
+
+                    //get the item at index 3 or use w342 as fallback
+                    posterSize = posterSizeOptions.optString(3, "w342"); //will try to get 3 item in index first, if does not work use w342
+
+
+                } catch (JSONException e) {
+                    logError("Failed parsing configuration", e, true);
+                }
             }
 
             @Override

@@ -5,7 +5,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flicks.models.Config;
 import com.example.flicks.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -29,9 +32,10 @@ public class MovieListActivity extends AppCompatActivity {
 
     //instance fields
     AsyncHttpClient client;
-    String imageBaseURL; //base url for loading images
-    String posterSize; //poster size to user when fetching images
     ArrayList<Movie> movies; //list of currently playing movies
+    RecyclerView rvMovies; //where we will display the movies
+    MovieAdapter adapter; //adapter wired to recycler view
+    Config config; //image config
 
 
     @Override
@@ -45,7 +49,15 @@ public class MovieListActivity extends AppCompatActivity {
         //initialize movies list
         movies = new ArrayList<>();
 
-        //get congfiguration method
+        //initialize the adapter
+        adapter = new MovieAdapter(movies); //can only initialize once 
+        
+        //resolve the recycler view and connect a layout manager 
+        rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+        rvMovies.setAdapter(adapter);
+
+        //get configuration method
         getConfiguration();
     }
 
@@ -74,6 +86,9 @@ public class MovieListActivity extends AppCompatActivity {
                         //get movie and append to array
                         Movie movie = new Movie(results.getJSONObject(i));
                         movies.add(movie);
+
+                        //notify adapter that a row was added
+                        adapter.notifyItemInserted(movies.size() - 1);
                     }
 
                     //log that we added a movie
@@ -113,20 +128,15 @@ public class MovieListActivity extends AppCompatActivity {
 
                 //try to get the poster
                 try {
-                    //get images data
-                    JSONObject images = response.getJSONObject("images");
 
-                    //get the image base url
-                    imageBaseURL = images.getString("secure_base_url"); //get string based on the identifier
-
-                    //get the poster size
-                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes"); //parse the value as an array
-
-                    //get the item at index 3 or use w342 as fallback
-                    posterSize = posterSizeOptions.optString(3, "w342"); //will try to get 3 item in index first, if does not work use w342
+                    //set configuration
+                    config = new Config(response);
 
                     //log that it worked
-                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s", imageBaseURL, posterSize));
+                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s", config.getImageBaseURL(), config.getPosterSize()));
+
+                    //pass config to the adapter
+                    adapter.setConfig(config);
 
                     //get the now playing movies
                     getNowPlaying();

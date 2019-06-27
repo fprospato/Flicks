@@ -10,26 +10,46 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.flicks.models.Config;
 import com.example.flicks.models.Movie;
 
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
-    //list of movies
-    ArrayList<Movie> movies;
+    //instances
+    ArrayList<Movie> movies; //list of movies
+    Config config; //congif for image urls
+    Context context;
+
 
     // initialize with list
     public MovieAdapter(ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
+
+    //getter for config
+    public Config getConfig() {
+        return config;
+    }
+
+
+    //setter for config
+    public void setConfig(Config config) {
+        this.config = config;
+    }
+
+
     //creates and inflates a new view
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //get the context and create the inflator
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         //create the view using the item_movie layout
@@ -50,7 +70,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.tvTitle.setText(movie.getTitle());
         holder.tvOverview.setText(movie.getOverview());
 
-        // TODO - set image using Glide
+        // build url for poster image
+        String imageUrl = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
+
+        //options for images
+        RequestOptions glideOptions = new RequestOptions();
+        glideOptions.placeholder(R.drawable.flicks_movie_placeholder) //place holder image
+                .error(R.drawable.flicks_movie_placeholder)
+                .transforms(new RoundedCorners(10)); //error image
+
+
+        //load image using Glide
+        Glide.with(context)
+                .load(imageUrl)
+                .apply(glideOptions)
+                .into(holder.ivPosterImage);
     }
 
 

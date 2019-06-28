@@ -3,13 +3,18 @@ package com.example.flicks.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class Config {
 
     //instance fields
     String imageBaseURL; //base url for loading images
     String posterSize; //poster size to user when fetching images
     String backdropSize; //back drop size
+
+    // no-arg, empty constructor required for Parceler
+    public Config() {}
 
     public Config(JSONObject object) throws JSONException {
         //get images data

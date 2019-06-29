@@ -81,11 +81,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         //determine orientation
         boolean isPortrait = this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-        if (isPortrait) {
-            rvMovies.setLayoutManager(new LinearLayoutManager(this));
-        } else {
-            rvMovies.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        }
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
 
         //log what we're showing

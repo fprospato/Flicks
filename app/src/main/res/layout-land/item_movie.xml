@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/ivBackdropImage"
-        android:layout_width="480dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"

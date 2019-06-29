@@ -23,8 +23,9 @@ The following **stretch** features are implemented:
 * [ ] Allow video trailers to be played in full-screen using the YouTubePlayerView from the details screen.
 
 The following **additional** features are implemented:
-
-* [ ] List anything else that you can get done to improve the app functionality!
+* Added a recommendations feture inside the movies details page that works in both landscape and portrait. You can press on any of the movies to see its details.
+* I added a alot of layout changes that you can see
+* Added landscape view for the movie details page
 
 ## Video Walkthrough
 

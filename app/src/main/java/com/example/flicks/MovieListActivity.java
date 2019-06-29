@@ -50,7 +50,7 @@ public class MovieListActivity extends AppCompatActivity {
         movies = new ArrayList<>();
 
         //initialize the adapter
-        adapter = new MovieAdapter(movies); //can only initialize once 
+        adapter = new MovieAdapter(movies); //can only initialize once
         
         //resolve the recycler view and connect a layout manager 
         rvMovies = (RecyclerView) findViewById(R.id.rvMovies);

@@ -16,16 +16,16 @@ The following **stretch** features are implemented:
   * [x] Title, Poster Image, Overview (Portrait mode)
   * [x] Title, Backdrop Image, Overview (Landscape mode)
 * [x] Display a nice default [placeholder graphic](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library#advanced-usage) for each image during loading
-* [ ] Allow user to view details of the movie including ratings and popularity within a separate activity
+* [x] Allow user to view details of the movie including ratings and popularity within a separate activity
 * [x] Improved the user interface by experimenting with styling and coloring.
 * [x] Apply rounded corners for the poster or background images using [Glide transformations](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library#transformations)
 * [ ] Apply the popular [Butterknife annotation library](http://guides.codepath.org/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
 * [ ] Allow video trailers to be played in full-screen using the YouTubePlayerView from the details screen.
 
 The following **additional** features are implemented:
-* Added a recommendations feture inside the movies details page that works in both landscape and portrait. You can press on any of the movies to see its details.
-* I added a alot of layout changes that you can see
-* Added landscape view for the movie details page
+* [x] Added a recommendations feture inside the movies details page that works in both landscape and portrait. You can press on any of the movies to see its details.
+* [x] I added a alot of layout changes that you can see
+* [x] Added landscape view for the movie details page
 
 ## Video Walkthrough
 

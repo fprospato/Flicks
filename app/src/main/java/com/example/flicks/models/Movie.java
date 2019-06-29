@@ -8,6 +8,7 @@ import org.parceler.Parcel;
 public class Movie {
 
     //values from API
+    String id;
     String title;
     String overview;
     String posterPath; //only the path
@@ -19,11 +20,16 @@ public class Movie {
 
     //initialize from JSON data
     public Movie(JSONObject object) throws JSONException {
+        id = object.getString("id");
         title = object.getString("title");
         overview = object.getString("overview");
         posterPath = object.getString("poster_path");
         backdropPath = object.getString("backdrop_path");
         voteAverage = object.getDouble("vote_average");
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {

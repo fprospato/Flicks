@@ -55,6 +55,8 @@ public class MovieListActivity extends AppCompatActivity {
         //resolve the recycler view and connect a layout manager 
         rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
+        //rvMovies.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)); //makes it go side ways
+        //rvMovies.setLayoutManager(new GridLayoutManager(this, 2)); //makes it like a collectionview
         rvMovies.setAdapter(adapter);
 
         //get configuration method

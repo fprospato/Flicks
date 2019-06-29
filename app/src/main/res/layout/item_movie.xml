@@ -13,6 +13,7 @@
         android:layout_width="90dp"
         android:layout_height="135dp"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/screen_background_dark" />
@@ -45,4 +46,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivPosterImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
